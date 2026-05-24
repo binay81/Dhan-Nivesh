@@ -1,0 +1,8 @@
+{
+  "name": "Dhan Nivesh",
+  "description": "AI-powered beginner-friendly investing platform for guided learning, goal-based investing, and virtual simulations.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

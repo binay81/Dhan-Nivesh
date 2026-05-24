@@ -1,0 +1,61 @@
+{
+  "entities": {
+    "User": {
+      "title": "User Profile",
+      "description": "User account and preferences",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string" },
+        "name": { "type": "string" },
+        "riskProfile": { "type": "string", "enum": ["conservative", "moderate", "aggressive"] },
+        "goals": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "balance": { "type": "number", "description": "Virtual money balance" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email"]
+    },
+    "PortfolioItem": {
+      "title": "Portfolio Item",
+      "description": "An asset in a user's virtual portfolio",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "assetName": { "type": "string" },
+        "assetType": { "type": "string", "enum": ["stock", "mutual_fund", "crypto", "commodity"] },
+        "quantity": { "type": "number" },
+        "avgPrice": { "type": "number" },
+        "purchaseDate": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "assetName", "quantity"]
+    },
+    "LearningProgress": {
+      "title": "Learning Progress",
+      "description": "Tracking user education progress",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "completedModules": { "type": "array", "items": { "type": "string" } },
+        "quizScores": { "type": "object" }
+      },
+      "required": ["userId"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "Main user documents"
+    },
+    "/users/{userId}/portfolio/{itemId}": {
+      "schema": "PortfolioItem",
+      "description": "Virtual portfolio items per user"
+    },
+    "/users/{userId}/learning/progress": {
+      "schema": "LearningProgress",
+      "description": "Educational progress for the user"
+    }
+  }
+}
